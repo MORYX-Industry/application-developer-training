@@ -1,8 +1,6 @@
 # Basics
 In this chapter you will learn the basics of MORYX and how it helps you to set up a production.
 
-[combine order list and begin production screenshots](#list-screenshot)
-
 ## Use Case
 
 Your costumer *Pencilla Inc.* produces pencils. The production needs prepared 
@@ -66,18 +64,13 @@ Now, that you have a running MORYX instance, you need to create some databases.
 To skip the UI here and speed things up, you'll use the MORYX CLI again.
 
 While the application is still running, `moryx exec post-setup` will create empty 
-databases and restart dependent modules. If your application runs on a different
+databases and restart dependent modules. Execute this command twice. If your application runs on a different
 host than `https://localhost:5000`, you can specify that by the `--endpoint <URL>`
 option.
 
 ```
 $ moryx exec post-setup
 ```
-
-naming proposals: 
-  * `moryx exec post-setup`
-  * `moryx exec create-dbs`
-
 
 ## Products
 
@@ -447,7 +440,7 @@ Fill in the details of the `Order`:
 * *Product*: ` 100001-00 GP-1B`
 * *Recipe*: ` Pencil Recipe`
 * *Amount*: ` 5`
-* 
+
 Click on the plus button to add this as an operation to the order. One order
 can have multiple operations, but this is not needed here. Click *CREATE* to 
 create the order.
@@ -479,16 +472,6 @@ Use the `SUCCESS` and `FAILED` action to make the products flow through the prod
 
 Here you will find a list of common problems, that might occur, and how to fix
 them. 
-
-### Unable to bind to `https://localhost:5000`
-
-> Unable to bind to https://localhost:5000 on the IPv4 loopback interface: 
-> 'Der Zugriff auf einen Socket war aufgrund der Zugriffsrechte des Sockets 
-> unzulässig.'. address=https://localhost:5000, interfaceName=IPv4 loopback, 
-> error=Der Zugriff auf einen Socket war aufgrund der Zugriffsrechte des 
-> Sockets unzulässig.
-
- TBD
 
 ### Encountering `WupiException`s
 
