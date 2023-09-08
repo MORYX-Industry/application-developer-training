@@ -14,6 +14,8 @@ material - wooden slats and graphite - and consists of the following four steps:
 Each step is executed on a separate workstation, where a worker has to follow
 instructions and may operate a machine.
 
+For more information about pencil production, look [here](https://musgravepencil.com/blogs/news/howapencilismade).
+
 ## Setup
   
 To setup a new project, you need the *MORYX CLI* installed. If you have installed
