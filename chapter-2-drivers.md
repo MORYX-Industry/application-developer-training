@@ -18,7 +18,7 @@ Use the CLI to add the Colorizing step to the project.
 ```
 moryx add step Colorizing
 ```
-Now, in order to use simulation, add the package `Moryx.Drivers.Simulation` to the project `Moryx.Resources.PencilFactory`.
+Now, in order to use simulation, add the package `Moryx.Drivers.Simulation` to the project `PencilFactory.Resources`.
 
 The ColorizingCell is using a protocol, where it can read and write variables on the physical cell.
 
@@ -44,7 +44,7 @@ public class Colorizing : Cell
 }
 ```
 
-In order to recognize, when an input changed, subsribe to that in  `OnInitialize` and when the driver is set. If you don't also subscribe to the event in the setter of the driver, you always have to restart the system after changing the driver of a cell.
+In order to recognize, when an input changed, subscribe to that in  `OnInitialize` and when the driver is set. If you don't also subscribe to the event in the setter of the driver, you always have to restart the system after changing the driver of a cell.
 
 ```cs
 private IInOutDriver<bool,bool> _driver;
@@ -79,7 +79,7 @@ In the method `OnInputChanged` you will check, if the value of `Ready` changed. 
 ```cs
 private void OnInputChanged(object sender, InputChangedEventArgs e)
 {
-    if (e.Key.Equals(Ready) && _driver.Input[Ready] && !(_currentSession is ActivityStart))
+    if (e.Key.Equals(ReadyToWork) && _driver.Input[ReadyToWork] && !(_currentSession is ActivityStart))
     {
         var rtw = Session.StartSession(ActivityClassification.Production, ReadyToWorkType.Pull);
         _currentSession = rtw;
@@ -90,7 +90,7 @@ private void OnInputChanged(object sender, InputChangedEventArgs e)
 }
 ```
 
-If the changed input is `ProcessResult`, read the result from the input and publish it as `ActivityCompleted`. Also set the input `ProcessStart` back to false, so that the physical cell is able to detect when to start the next process. If don't reset the value of `ProcessStart`, the physical cell is not able to recognize the specific moment an activity should start. Some physical cells also only recognize rising or falling edges. Constant values would trigger nothing.
+If the changed input is `ProcessResult`, read the result from the input and publish it as `ActivityCompleted`. Also set the input `ProcessStart` back to false, so that the physical cell is able to detect when to start the next process. If you don't reset the value of `ProcessStart`, the physical cell is not able to recognize the specific moment an activity should start. Some physical cells also only recognize rising or falling edges. Constant values would trigger nothing.
 
 ```cs
 private void OnInputChanged(object sender, InputChangedEventArgs e)
@@ -144,7 +144,7 @@ public override IEnumerable<Session> ControlSystemAttached()
 }
 ```
 
-Now you have to implement the driver. Create a new driver `SimulatedColorizingDriver` in the project `Moryx.Resources.PencilFactory`, which is derived from `SimulatedInOutDriver<bool, bool>` and add the constants for the variable names. 
+Now you have to implement the driver. Create a new driver `SimulatedColorizingDriver` in the project `PencilFactory.Resources`, which is derived from `SimulatedInOutDriver<bool, bool>` and add the constants for the variable names. 
 
 ```cs
 [ResourceRegistration]
@@ -180,7 +180,7 @@ protected override void OnOutputSet(object sender, string key)
 {
     if (key == ProcessStart)
     {
-        SimulatedInput.Values[Ready] = false;
+        SimulatedInput.Values[ReadyToWork] = false;
         if (SimulatedOutput.Values[ProcessStart])
             SimulatedState = SimulationState.Executing;
         else

@@ -66,7 +66,7 @@ Now, that you have a running MORYX instance, you need to create some databases.
 To skip the UI here and speed things up, you'll use the MORYX CLI again.
 
 While the application is still running, `moryx exec post-setup` will create empty 
-databases and restart dependent modules. Execute this command twice. If your application runs on a different
+databases and restart dependent modules. If your application runs on a different
 host than `https://localhost:5000`, you can specify that by the `--endpoint <URL>`
 option.
 
@@ -101,7 +101,7 @@ From the details above, the `GraphitePencilType` needs
 * a hardness property
   
 You will find the `GraphitePencilType` among all other `<Product>Types` in the
-`Moryx.PencilFactory` package within the `Products` folder.
+`PencilFactory` package within the `Products` folder.
 
 For properties to be shown on the UI, add the [EntrySerialize](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Core/Serialization/EntryConvert.md#entryserialize-attribute)
 attribute. For properties to be saved in the database, use the [DataMember](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datamemberattribute?view=net-7.0) attribute.
@@ -185,7 +185,7 @@ Now you have your products `100001-00 Brown Pencil GP-1B` and
 `100002-00 Green Pencil GP-HB` and a resource that can produce those products. 
 The next challenge is to let your resource produce the pencils? So far there is 
 no script that describes how the pencils are produced by the resources. All that 
-exist currently are pencils and resources. The next step now is **Recipe** and 
+exist currently are pencils and resources. The next step now is to create a **Recipe** and a 
 [Workplan](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Workplans.md). 
 
 
@@ -219,7 +219,7 @@ Based on these requirements
 
 ### Add worker support
 
-The `AssemblingCell`, you will find it in `Moryx.Resources.PencilFactory`, 
+The `AssemblingCell`, you will find it in `PencilFactory.Resources`, 
 already has an instructor.
 
 ``` cs
@@ -483,7 +483,7 @@ The application depends on MORYX modules, that are licensed. But no worries:
 They ship with developer licenses, that need to be activated:
 
 * Open [*CodeMeter Control Center*](https://www.phoenixcontact.com/de-de/produkte/programmier-software-plcnext-engineer-1046008), 
-  that you should have installed beforehand 
+  that you should have installed beforehand through the [PHOENIX CONTACT Activation Wizard](https://www.phoenixcontact.com/de-de/produkte/programmier-software-plcnext-engineer-1046008)
 * Drag & Drop the `.WibuCmRau` files onto it
   
 ![Activate developer licenses](./chapter-1/drag-licenses.png)
