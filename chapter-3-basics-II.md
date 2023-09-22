@@ -3,43 +3,17 @@ In this chapter you will learn how to find the right Cell depending on a product
 
 The manufaturer realised that only one ColorizingCell, in which the paint always has to be changend, isn't really efficient. He decided to add another one. Now for each color there is one cell.
 
-In order to define, which cell uses which color, first add a property `Color` to the ColorizingCell.
-
-```cs
-[DataMember, EntrySerialize]
-public PencilColor Color { get; set; }
-```
-
-Now MORYX has to know, what a cell is capable of. For this [Capabilities](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Capabilities.md) exist.
-
-Add the property `Color` to the `ColorizingCapabilities` and check if the colors of the provided Capabilities match the ones you need.
-```cs
-public class ColorizingCapabilities : CapabilitiesBase
-{
-    public PencilColor Color { get; set; }
-
-    protected override bool ProvidedBy(ICapabilities provided)
-    {
-        var providedCapabilities​ = provided as Colorizing​Capabilities;
-        if (providedCapabilities​ != null && providedCapabilities​.Color == Color) 
-            return true;
-
-        return false;
-    }
-}
-```
-
-Now you have to set the color in the capabilities. The color setup in the cell, is defined in the cell and has to be updated in the capabilities accordingly.
+In order to define, which cell uses which color, first add a property `Color` to the ColorizingCell and set the color in the [Capabilities](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Capabilities.md) to let Moryx know what the cell is capable of. In this case using a specific color. Remember EntrySerialize means the property can be set in the ui by editing the corresponding resource.
 
 ```cs
 [ResourceRegistration] 
 public class ColorizingCell : Cell
 {
     [DataMember]
-    private Color _color;
+    private PencilColor _color;
 
     [EntrySerialize]
-    public Color Color
+    public PencilColor Color
     {
         get => _color;
         set
@@ -61,6 +35,25 @@ public class ColorizingCell : Cell
     ...
 }
 ```
+
+For this to work add the property `Color` to the `ColorizingCapabilities` and check if the colors of the provided Capabilities match the ones you need.
+
+```cs
+public class ColorizingCapabilities : CapabilitiesBase
+{
+    public PencilColor Color { get; set; }
+
+    protected override bool ProvidedBy(ICapabilities provided)
+    {
+        var providedCapabilities​ = provided as Colorizing​Capabilities;
+        if (providedCapabilities​ != null && providedCapabilities​.Color == Color) 
+            return true;
+
+        return false;
+    }
+}
+```
+
 Now MORYX knows, which cell uses which color, but it still doesn't know which color the current activity needs. This information can only be found in the product.
 
 In order to let the activity know, which color it needs, you wil use Parameters.
@@ -72,7 +65,7 @@ Under the hood, however, the parameters can do even more: Instances of the
 process and product will be provided to the Populate method and can thus 
 get lots of information. For example, order numbers can be read from the recipe or the ProductType can be read from the process. 
 
-Now add the color as property to the `ColorizingParameters`. Since the property is automatically set using the product information, it doesn't need to be displayed in the UI. 
+Now add the color as property to the `ColorizingParameters` found in the folder `Activities`. Since the property is automatically set using the product information, it doesn't need to be displayed in the UI. 
 
 When populating parameters, the current object always represents the parameters in the workplan, while `instance` (the parameter of the populate method) holds the parameters passed by the activity. The resource gets them during the `OnActivityStarted` method. 
 Now you have to set the color of `instance` to the color of the product. In order to get the ProductType, cast the process to a `ProductionProcess` and get the ProductType from the ProductInstance.
@@ -99,7 +92,7 @@ The color in the `Colorizing​Parameters` defines which color is needed for the
 This information still has to be passed on to ProcessEngine, which is done, by adjusting the RequiredCapabilities. 
 The ProcessEngine routes a product to a Cell, which can perform the next activity to be done.
 
-Go to the `ColorizingActivity` and set the color in the RequiredCapabilities. 
+Go to the `ColorizingActivity` also found in the folder `Activities` and set the color in the RequiredCapabilities. 
 
 ```cs
 [ActivityResults(typeof(Colorizing​ActivityResults))]
@@ -113,7 +106,7 @@ public class Colorizing​Activity : Activity<Colorizing​Parameters>
 }
 ```
 
-Now you have done everything to have separate Cells for each pencil color. Start your project and create two different ColorizingCells, one for each color. Do not forget to configure driver for each cell.
+Now you have done everything to have separate Cells for each pencil color. Start your project and create two different ColorizingCells, one for each color. Do not forget to configure a driver for each cell just like shown at the end of [chapter-2](chapter-2-drivers.md).
 
 In the first chapter you set values in your parameters using the workplans UI. In this chapter the color was automatically fetched from the product. 
 This concept of not having to set the value of parameters explicitly using the UI, but instead automatically fetching them from somewhere is called `ParameterBinding`.
