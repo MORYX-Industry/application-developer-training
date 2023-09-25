@@ -107,6 +107,11 @@ public class Colorizing​Activity : Activity<Colorizing​Parameters>
 ```
 
 Now you have done everything to have separate Cells for each pencil color. Start your project and create two different ColorizingCells, one for each color. Do not forget to configure a driver for each cell just like shown at the end of [chapter-2](chapter-2-drivers.md).
+- Bellow you will find the flow chart describing everything that happens in the background when you start an order.
+
+![Flow chart](./chapter-3/flowChart.drawio.png)
+
+
 
 In the first chapter you set values in your parameters using the workplans UI. In this chapter the color was automatically fetched from the product. 
 This concept of not having to set the value of parameters explicitly using the UI, but instead automatically fetching them from somewhere is called `ParameterBinding`.
