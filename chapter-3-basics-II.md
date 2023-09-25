@@ -58,8 +58,13 @@ Now MORYX knows, which cell uses which color, but it still doesn't know which co
 
 In order to let the activity know, which color it needs, you wil use Parameters.
 
-Parameters are the connection between *Tasks* and *Activities*. The task, which
-is equivalent to the workplan step, can be parameterized and parameters can
+Parameters are the connection between *Tasks* and *Activities*. 
+In the production process it looks like this:
+
+![Flow chart](./chapter-3/flowChart.drawio.png)
+
+As you can see the resource will only get the *Acvitiy*. 
+The *Task*, which is equivalent to the *workplan step*, can be parameterized and parameters can
 be transferred to the activity.
 Under the hood, however, the parameters can do even more: Instances of the 
 process and product will be provided to the Populate method and can thus 
@@ -107,10 +112,6 @@ public class Colorizing​Activity : Activity<Colorizing​Parameters>
 ```
 
 Now you have done everything to have separate Cells for each pencil color. Start your project and create two different ColorizingCells, one for each color. Do not forget to configure a driver for each cell just like shown at the end of [chapter-2](chapter-2-drivers.md).
-- Bellow you will find the flow chart describing everything that happens in the background when you start an order.
-
-![Flow chart](./chapter-3/flowChart.drawio.png)
-
 
 
 In the first chapter you set values in your parameters using the workplans UI. In this chapter the color was automatically fetched from the product. 
