@@ -49,8 +49,8 @@ This is a list of more or less 'advanced' topics
 Before to start, you need the following tools installed on you machine:
 
 * [ ] [Git](https://git-scm.com/)
-* [ ] Visual Studio 2022 (Any version below wouldn't work, but you can install them in parallel)
-* [ ] [PHOENIX CONTACT Activation Wizard](https://www.phoenixcontact.com/de-de/produkte/programmier-software-plcnext-engineer-1046008)
+* [ ] [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (Any version below wouldn't work, but you can install them in parallel)
+* [ ] [CodeMeter User Runtime (Version 8.x)](https://www.wibu.com/de/support/anwendersoftware/anwendersoftware.html)
 
 Find more details on [requirements here](chapter-0-requirements.md).
 
