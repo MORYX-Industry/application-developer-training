@@ -482,8 +482,8 @@ them.
 The application depends on MORYX modules, that are licensed. But no worries:
 They ship with developer licenses, that need to be activated:
 
-* Open [*CodeMeter Control Center*](https://www.phoenixcontact.com/de-de/produkte/programmier-software-plcnext-engineer-1046008), 
-  that you should have installed beforehand through the [PHOENIX CONTACT Activation Wizard](https://www.phoenixcontact.com/de-de/produkte/programmier-software-plcnext-engineer-1046008)
+* Open *CodeMeter Control Center*, 
+  that you should have installed beforehand through the [CodeMeter User Runtime (Version 8.x)](https://www.wibu.com/de/support/anwendersoftware/anwendersoftware.html)
 * Drag & Drop the `.WibuCmRau` files onto it
   
 ![Activate developer licenses](./chapter-1/drag-licenses.png)
