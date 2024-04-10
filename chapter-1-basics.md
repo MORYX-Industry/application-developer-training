@@ -181,17 +181,17 @@ similar to the image below.
 
 ![Products list](./chapter-1/productList.PNG)
 
-Now you have your products `100001-00 Brown Pencil GP-1B` and 
-`100002-00 Green Pencil GP-HB` and a resource that can produce those products. 
-The next challenge is to let your resource produce the pencils? So far there is 
-no script that describes how the pencils are produced by the resources. All that 
-exist currently are pencils and resources. The next step now is to create a **Recipe** and a 
+Now you should have your products `100001-00 Brown Pencil GP-1B` and 
+`100002-00 Green Pencil GP-HB`. 
+The next challenge is to actually let a resource produce the pencils. So far there is 
+no script that describes how the pencils are produced. 
+Therefore, the next step is to model a resource after which we can create a **Recipe** and a 
 [Workplan](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Workplans.md). 
 
 
 ## Resources
 
-Next step is to model the assembling station, used to assemble the pencils. This
+We begin with modelling the assembling station, used to assemble the pencils. This
 is where resources come into play.
 
 Resources represent physical assets and logical objects like robots or drivers 
@@ -266,7 +266,7 @@ the previously created *VisualInstructor* to its *Instructor* property.
 ### Sessions
 
 Cell and Instructor are now connected, but they do not interact with each other.
-Therefor you need to implement the cells session handling. But before you do, 
+Therefor, you need to implement the cells session handling. But before you do, 
 you will get a short introduction about how this works in theory and the 
 vocabulary that is used within MORYX.
 
@@ -375,7 +375,7 @@ In order to produce pencils, you have to establish the connection between cells
 and products: MORYX needs to know, how a product flows through the production 
 line. This is not done in the code, but modelled within [Workplans](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/main/docs/articles/Processing/Workplans.md).
 
-This allows to define in a rather abstract way, *what* needs to be done without
+This allows you to define in a rather abstract way, *what* needs to be done without
 going much more into details. MORYX will find the way later, *how* this is done
 for a running order. 
 
