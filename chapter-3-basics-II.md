@@ -1,9 +1,9 @@
 # Basics II - Capabilities and ParameterBinding
 In this chapter you will learn how to find the right Cell depending on a product property.
 
-The manufaturer realised that only one ColorizingCell, in which the paint always has to be changend, isn't really efficient. He decided to add another one. Now for each color there is one cell.
+The manufacturer realised that only one ColorizingCell, in which the paint always has to be changed, isn't really efficient. He decided to add another one. Now for each color there is one cell.
 
-In order to define, which cell uses which color, first add a property `Color` to the ColorizingCell and set the color in the [Capabilities](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Capabilities.md) to let Moryx know what the cell is capable of. In this case using a specific color. Remember EntrySerialize means the property can be set in the ui by editing the corresponding resource.
+In order to define, which cell uses which color, first add a property `Color` to the ColorizingCell and set the color in the [Capabilities](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Processing/Capabilities.md) to let Moryx know what the cell is capable of. In this case using a specific color. Remember EntrySerialize means the property can be set in the UI by editing the corresponding resource.
 
 ```cs
 [ResourceRegistration] 
@@ -56,14 +56,14 @@ public class ColorizingCapabilities : CapabilitiesBase
 
 Now MORYX knows, which cell uses which color, but it still doesn't know which color the current activity needs. This information can only be found in the product.
 
-In order to let the activity know, which color it needs, you wil use Parameters.
+In order to let the activity know, which color it needs, you will use Parameters.
 
 Parameters are the connection between *Tasks* and *Activities*. 
 In the production process it looks like this:
 
 [![](https://mermaid.ink/img/pako:eNpdktuO2jAQhl_F8g1BChQngRwuWnV3u1KrHlBBqlTlxsRmsUg8ke3sbpbl3WsnJKDmJrbnm9_zz_iEC2AcZ3hfwktxoMqg7V0ukf204TXxNsad_aq5okaARH1s8gCIoFoBawozmaLZ7GPHB9694tRw9A1206tMMALhABC0VlBwrXM52R644khoBLJsr7pISG2oLPjESnXJo0zkfQc4WmBQmWj0B9SxLqm8wNEIL09fNTLdHRRJ_mpGtCc_nfv_0mW8P9JS83e3X3neF8mm09voVjV9MPa29MjRxi4vQDxemAwmPxdGPAvTXohkJFJvDXVTOmZNFa244QrB3lX5f1I6JpHF6VFIhn5QUxyEfMrlPa3pTpQWRo3uTpyAbcmzYJzdtbm0ygdgaLBIFjcee1Hi2RlD_SGX62ZXCn1AP8GIvSi6eQ_uL4mjfRJ4v7mGRhWuB-6JvNie2hIG_jpyEl5RO2MGkncDuIGvg11iH1dcVVQw-yhP7gnl2JqqeI4zu2R8T5vS5DiXZ4vSxsCmlQXOjK3Mx03NbE8fBH2yTcXZ3vn0cU3lX4BqgOwWZyf8ijMSpvN4kYTxIk5IGCRh5OMWZ7MgiuZhmARJFK6iIIiWq7OP3zoJMk8tmAZxmoZxHEUkOP8DohsVrg?type=png)](https://mermaid.live/edit#pako:eNpdktuO2jAQhl_F8g1BChQngRwuWnV3u1KrHlBBqlTlxsRmsUg8ke3sbpbl3WsnJKDmJrbnm9_zz_iEC2AcZ3hfwktxoMqg7V0ukf204TXxNsad_aq5okaARH1s8gCIoFoBawozmaLZ7GPHB9694tRw9A1206tMMALhABC0VlBwrXM52R644khoBLJsr7pISG2oLPjESnXJo0zkfQc4WmBQmWj0B9SxLqm8wNEIL09fNTLdHRRJ_mpGtCc_nfv_0mW8P9JS83e3X3neF8mm09voVjV9MPa29MjRxi4vQDxemAwmPxdGPAvTXohkJFJvDXVTOmZNFa244QrB3lX5f1I6JpHF6VFIhn5QUxyEfMrlPa3pTpQWRo3uTpyAbcmzYJzdtbm0ygdgaLBIFjcee1Hi2RlD_SGX62ZXCn1AP8GIvSi6eQ_uL4mjfRJ4v7mGRhWuB-6JvNie2hIG_jpyEl5RO2MGkncDuIGvg11iH1dcVVQw-yhP7gnl2JqqeI4zu2R8T5vS5DiXZ4vSxsCmlQXOjK3Mx03NbE8fBH2yTcXZ3vn0cU3lX4BqgOwWZyf8ijMSpvN4kYTxIk5IGCRh5OMWZ7MgiuZhmARJFK6iIIiWq7OP3zoJMk8tmAZxmoZxHEUkOP8DohsVrg)
 
-As you can see the resource will only get the *Acvitiy*. 
+As you can see the resource will only get the *Activity*. 
 The *Task*, which is equivalent to the *workplan step*, can be parameterized and parameters can
 be transferred to the activity.
 Under the hood, however, the parameters can do even more: Instances of the 
@@ -76,7 +76,7 @@ When populating parameters, the current object always represents the parameters 
 Now you have to set the color of `instance` to the color of the product. In order to get the ProductType, cast the process to a `ProductionProcess` and get the ProductType from the ProductInstance.
 
 ```cs
-public class ColorizingParameters : VisiualInstructionParameters
+public class ColorizingParameters : VisualInstructionParameters
 {
     public PencilColor Color { get; set; }
 
@@ -129,7 +129,7 @@ Imagine the right half of your pencil is green and the other one brown, but you 
 In order to know which color is still missing on the pencil, you would need to know, if the pencil was already partly colored. 
 Just the information of the product wouldn't be sufficient anymore. 
 
-Instead of creating different steps, you could also create different capabilities. You could have made the `ColorizingCapabilities` abstract and then dervive `ColorizingGreenCapabilities` and `ColorizingBrownCapabilities` from it.
+Instead of creating different steps, you could also create different capabilities. You could have made the `ColorizingCapabilities` abstract and then derive `ColorizingGreenCapabilities` and `ColorizingBrownCapabilities` from it.
 This should be used, when it's not possible to setup a resource in order to change its characteristic. 
 Let's look at the example of printing a label. The label should be printed in a specific color and with a specific method (pad printing or laser printing). 
 Nearly all printers can print any color. In worst case you have to change the color manually, but it is still possible. Changing the printing method is most of the time physically impossible. 
