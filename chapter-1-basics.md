@@ -3,11 +3,11 @@ In this chapter you will learn the basics of MORYX and how it helps you to set u
 
 ## Use Case
 
-Your costumer *Pencilla Inc.* produces pencils. The production needs prepared 
+Your customer *Pencilla Inc.* produces pencils. The production needs prepared 
 material - wooden slats and graphite - and consists of the following four steps:​
 
 * Assembling: Glue slats and graphite together​ and shape it.
-* Colorizing : Add paint and imprint text
+* Colorizing: Add paint and imprint text
 * Testing: Test if the pencil writes and if the colors are visible on paper.
 * Packing: Pack each article in a box​
 
@@ -62,7 +62,7 @@ Run the application (press `F5`).
 ![Application dashboard](./chapter-1/HomePageOfPencilApp.PNG)
 
 
-Now, that you have a running MORYX instance, you need to create some databases. 
+Now that you have a running MORYX instance, you need to create some databases. 
 To skip the UI here and speed things up, you'll use the MORYX CLI again.
 
 While the application is still running, `moryx exec post-setup` will create empty 
@@ -80,9 +80,9 @@ At first, you will model [products](https://github.com/PHOENIXCONTACT/MORYX-Fram
 Products represent the articles to be manufactured. MORYX differentiates between 
 `ProductType` and `ProductInstance`. The `ProductType` is what you can order 
 in a catalog, while the `ProductInstance` is what you would receive after ordering: 
-an instance of the product with its unique serialnumber. In order for a `ProductType` 
+an instance of the product with its unique serial number. In order for a `ProductType` 
 to be produced, it needs a corresponding `ProductInstance`. For further 
-information on how to create a product see [this](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/main/docs/tutorials/HowToCreateAProduct.md).
+information on how to create a product, see [this](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/main/docs/tutorials/HowToCreateAProduct.md).
 
 Let's take a look at the composition of the pencil *Pencilla Inc.* produces.
 
@@ -103,7 +103,7 @@ From the details above, the `GraphitePencilType` needs
 You will find the `GraphitePencilType` among all other `<Product>Types` in the
 `PencilFactory` package within the `Products` folder.
 
-For properties to be shown on the UI, add the [EntrySerialize](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Core/Serialization/EntryConvert.md#entryserialize-attribute)
+For properties to be shown in the UI, add the [EntrySerialize](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/articles/Core/Serialization/EntryConvert.md#entryserialize-attribute)
 attribute. For properties to be saved in the database, use the [DataMember](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datamemberattribute?view=net-7.0) attribute.
 
 ``` cs
@@ -144,7 +144,7 @@ To create a product, you need to run the application now and head to the
 **Products UI**. 
 
 Click on the plus button to open the 'Product Importer' menu. This title may 
-sound a bit confusing, but it let's you add new products. 
+sound a bit confusing, but it lets you add new products. 
 
 > *Note* The naming here comes from the fact, that you wouldn't necessarily add
 > products here, but 'import' them from other systems.
@@ -160,13 +160,13 @@ sound a bit confusing, but it let's you add new products.
 * Click on the product you just added: `100001-00 GP-1B`
 * Click on the edit icon at the top right to edit.
 * In the `Color` dropdown choose `Green`
-* In the `Hardness` dropdown choose `B` as the hardness, which represent `1B`
+* In the `Hardness` dropdown choose `B` as the hardness, which represents `1B`
   in this case.
 * Save your changes by clicking on the save icon at the top right corner.
 
  ![Graphite GP-1B](./chapter-1/AddGraphiteProduct.PNG)
 
-Repeat the same step for a second product:
+Repeat the same steps for a second product:
 
 
 * `GraphitePencilType`
@@ -176,7 +176,7 @@ Repeat the same step for a second product:
   * *Hardness*: `HB`
   * *Color*: `Brown`
 
-If you did everything correctly you should end up with something more or less 
+If you did everything correctly, you should end up with something more or less 
 similar to the image below.
 
 ![Products list](./chapter-1/productList.PNG)
@@ -191,7 +191,7 @@ Therefore, the next step is to model a resource after which we can create a **Re
 
 ## Resources
 
-We begin with modelling the assembling station, used to assemble the pencils. This
+We begin with modeling the assembling station, used to assemble the pencils. This
 is where resources come into play.
 
 Resources represent physical assets and logical objects like robots or drivers 
@@ -219,7 +219,7 @@ Based on these requirements
 
 ### Add worker support
 
-The `AssemblingCell`, you will find it in `PencilFactory.Resources`, 
+The `AssemblingCell`, which you will find in `PencilFactory.Resources`, 
 already has an instructor.
 
 ``` cs
@@ -244,7 +244,7 @@ instructions to a worker. So the following resources are needed:
 * 1 `AssemblingCell`
 * 1 `VisualInstructor`
 
-You will setup these in MORYX within the *Resources UI* by clicking the "+" 
+You will set up these in MORYX within the *Resources UI* by clicking the "+" 
 button and selecting the required cell.
 
 
@@ -281,14 +281,14 @@ Usually a *session* (and with it a *sequence*) is started by a resource, telling
 the process engine, that it is *ReadyToWork*. 
 
 Then with `ActivityStart()` the process engine can tell a resource, that it 
-should start working on a product. After the resource has finished it's job, it 
+should start working on a product. After the resource has finished its job, it 
 will signal this with `ActivityCompleted()`.
 
 When the process engine has processed the *ActivityResult* (submitted by `ActivityCompleted`),
 it will "close" the sequence with `SequenceCompleted()`.
 
 Then, the resource could continue the current *session* (`ContinueSession`) with
-another *sequence* or start a whole new *session* by signalling `ReadyToWork`. 
+another *sequence* or start a whole new *session* by signaling `ReadyToWork`. 
 
 ![Activities, Sequences and Sessions](./chapter-1/SessionsAndSequences.png)
 
@@ -317,8 +317,8 @@ thus signal `ReadyToWork` to the ProcessEngine.
 * `ActivityClassification.Production` is used to notify that the cell is ready to
  work on an `Activity` of type `production`.
 
-Since that should result in an `ActivityStarted` event, the next thing to be
- implemented will be the `ActivityStarted()` function. Find the comment
+Since that should result in an `ActivityStarted` event, the next thing to
+ implement will be the `ActivityStarted()` function. Find the comment
 `/* Start execution here */` and replace it so that the whole function looks 
 like this:
 
@@ -379,7 +379,7 @@ This allows you to define in a rather abstract way, *what* needs to be done with
 going much more into details. MORYX will find the way later, *how* this is done
 for a running order. 
 
-Start the application, go to *Wokplans* and click on the plus button.
+Start the application, go to *Workplans* and click on the plus button.
 
 ![Create new workplan](./chapter-1/NewWorkplan.png)
 
@@ -402,7 +402,7 @@ When you are done, modeling your workflow, you have to save the workplan.
 
 ### Add a *Recipe*
 
-In order to make the connection between a`Product` and the `Workplan` you just 
+In order to make the connection between a `Product` and the `Workplan` you just 
 created, you need a *Recipe*.
 
 Go to *Products* and select the *Product* you want to produce, that is the 
@@ -418,13 +418,13 @@ your created workplan `Workplan`.
 ![Create a new recipe](./chapter-1/pencilRecipe.PNG)
 
 * Click on **Create** for the recipe to show up in the products UI. 
-* For the recipe to be automatically seletcted when the product is produced, select 
+* For the recipe to be automatically selected when the product is produced, select 
 `Default` Classification.
 * Save your changes by clicking on the save icon located at the top right corner.
 
 ![Select recipe classification](./chapter-1/firstRecipe.PNG)
 
-* Repeat the same step for the second product `100002-00 Green Pencil GP-HB`.
+* Repeat the same steps for the second product `100002-00 Green Pencil GP-HB`.
 
 ### Start production
 
@@ -463,7 +463,7 @@ Now the production is running!
 That's it, you should now be able to let the pencils flow through the assembling
 cell.
 
-In order to see the visual instructions, got to the module `Worker Support` and select for VisualInstructor as Display
+In order to see the visual instructions, go to the module `Worker Support` and select for VisualInstructor as Display
 
 ![Select Display](./chapter-1/SelectDisplay.png)
 
@@ -483,7 +483,7 @@ The application depends on MORYX modules, that are licensed. But no worries:
 They ship with developer licenses, that need to be activated:
 
 * Open *CodeMeter Control Center*, 
-  that you should have installed beforehand through the [CodeMeter User Runtime (Version 8.x)](https://www.wibu.com/de/support/anwendersoftware/anwendersoftware.html)
+  which you should have installed beforehand through the [CodeMeter User Runtime (Version 8.x)](https://www.wibu.com/de/support/anwendersoftware/anwendersoftware.html)
 * Drag & Drop the `.WibuCmRau` files onto it
   
 ![Activate developer licenses](./chapter-1/drag-licenses.png)
