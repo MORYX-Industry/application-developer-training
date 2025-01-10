@@ -5,7 +5,7 @@ through the typical process of an application developer and learn about MORYX
 concepts and terminology on the way.
 
 You will accompany a pencil manufacturer on its road to the digital factory. 
-Despite using some specialised machines, they don't have any automatted 
+Despite using some specialized machines, they don't have any automated 
 processes right now.
 
 
@@ -19,7 +19,7 @@ Programming**, all of that is **not mandatory** to master this.
 
 ## Prerequisite
 
-Below is a list of patterns and basic concepts that MORYX is build upon, but you
+Below is a list of patterns and basic concepts that MORYX is built upon, but you
 don't need to know right upfront. 
 
 ### General/OOP
@@ -46,7 +46,7 @@ This is a list of more or less 'advanced' topics
 
 ## Requirements
 
-Before to start, you need the following tools installed on you machine:
+Before you start, you need the following tools installed on your machine:
 
 * [ ] [Git](https://git-scm.com/)
 * [ ] [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (Any version below wouldn't work, but you can install them in parallel)
@@ -80,12 +80,12 @@ MORYX Terminology and Concepts you will learn
 
 ## [Chapter 2 - Drivers](chapter-2-drivers.md)
 
-Since so many pencils were sold, the manufacturer decided that only manual cells aren't feasible anymore. So some manual cells are replaced by full automated ones. 
+Since so many pencils were sold, the manufacturer decided that only manual cells aren't feasible anymore. So some manual cells are replaced by fully automated ones. 
 
 In this chapter you will learn how to
 * Communicate with hardware 
 * Use different hardware, without having to adjust the source code
-* Setup a simulated production
+* Set up a simulated production
 
 Terminology and Concepts you will learn
   * Drivers
@@ -94,9 +94,9 @@ Terminology and Concepts you will learn
 
 
 ## [Chapter 3 - Basics II](chapter-3-basics-II.md)
-The manufacturer decided to have a seperate Colorizing Cell for each color in order not to have to change the paint anymore.
+The manufacturer decided to have a separate Colorizing Cell for each color in order not to have to change the paint anymore.
 
-In this chapter you will lean how to
+In this chapter you will learn how to
 
 * Find the right Cell depending on a product property
 
