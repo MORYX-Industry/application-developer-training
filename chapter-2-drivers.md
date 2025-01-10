@@ -1,6 +1,6 @@
 # Driver
 In this chapter you will implement the ColorizingCell and the TestingCell. 
-Both of them are automatic cells, which don't need any user interactions. 
+Both of them are automatic cells, which don't need any user interaction. 
 Correspondingly there are no visual instructions. Instead there is some kind of hardware, which needs to be connected to MORYX.
 
 For the cell to communicate with the hardware a [Driver](https://github.com/PHOENIXCONTACT/MORYX-Framework/blob/dev/docs/tutorials/HowToBuildADriver.md) is needed. 
@@ -8,7 +8,7 @@ In here the communication is encapsulated.
 
 As there are many different ways to communicate, there are also many different implementations of drivers. 
 Common interfaces for drivers are `IMessageDriver<TMessage>` and `IInOutDriver`.
-* The `IMessageDriver<TMessage>` is used for message based protocols. The driver is able to send and receive messages. When a new message is received, an event get's invoked. A typical procotol would be MQTT.
+* The `IMessageDriver<TMessage>` is used for message based protocols. The driver is able to send and receive messages. When a new message is received, an event gets invoked. A typical protocol would be MQTT.
 * The `IInOutDriver` can read and write variables on a server. A typical protocol is OPC UA. 
 
 ## Simulated InOutDriver
@@ -24,10 +24,10 @@ The ColorizingCell is using a protocol, where it can read and write variables on
 
 1. When the physical cell is ready to work, it will set the input `Ready` to `true`.
 2. The digital twin will send a `ReadyToWork`. 
-3. When the cells receives an activity, set the output `ProcessStart` to `true`. 
+3. When the cell receives an activity, set the output `ProcessStart` to `true`. 
 4. Read the result from the input `ProcessResult`. 
 
-For a protocol like that the `IInOutDriver` makes the most sense. Open the ColorizingCell and replace the already generated `IMessageDriver` by an `IInOutDriver`. Also add constants the names of the variables to read and write.
+For a protocol like that the `IInOutDriver` makes the most sense. Open the ColorizingCell and replace the already generated `IMessageDriver` by an `IInOutDriver`. Also add constants for the names of the variables to read and write.
 
 ```cs
 [ResourceRegistration]
@@ -44,7 +44,7 @@ public class Colorizing : Cell
 }
 ```
 
-In order to recognize, when an input changed, subscribe to that in  `OnInitialize` and when the driver is set. If you don't also subscribe to the event in the setter of the driver, you always have to restart the system after changing the driver of a cell.
+In order to recognize, when an input changes, subscribe to that in  `OnInitialize` and when the driver is set. If you don't also subscribe to the event in the setter of the driver, you will always have to restart the system after changing the driver of a cell.
 
 ```cs
 private IInOutDriver<bool,bool> _driver;
@@ -74,7 +74,7 @@ protected override void OnInitialize()
 
 
 
-In the method `OnInputChanged` you will check, if the value of `Ready` changed. If it is true, send a `ReadyToWork` to the ProcessEngine.
+In the method `OnInputChanged` you will check, if the value of `Ready` has changed. If it is true, send a `ReadyToWork` to the ProcessEngine.
 
 ```cs
 private void OnInputChanged(object sender, InputChangedEventArgs e)
@@ -108,7 +108,7 @@ private void OnInputChanged(object sender, InputChangedEventArgs e)
 }
 ```
 
-In order to start an activity on the phycial cell when an activityStart is received, set `ProcessStart` to `true`.
+In order to start an activity on the physical cell when an activityStart is received, set `ProcessStart` to `true`.
 ```cs
 public override void StartActivity(ActivityStart activityStart)
 {
@@ -135,7 +135,7 @@ public override void SequenceCompleted(SequenceCompleted completed)
 }
 ```
 
-The same applies for `ControlSystemAttched`.
+The same applies for `ControlSystemAttached`.
 
 ```cs
 public override IEnumerable<Session> ControlSystemAttached()
@@ -158,7 +158,7 @@ public class SimulatedColorizingDriver : SimulatedInOutDriver<bool, bool>
 }
 ```
 
-A `SimulationDriver` has several states, which are needed in order for the SimulationModule to know whats happens. After the system has booted, the driver is in the state `Idle`. Is a product arriving, the cell sends a `ReadyToWork` and the driver changes its state to `Requested`. During production the state is `Executing` and afterward it changes back to `Idle`.
+A `SimulationDriver` has several states, which are needed in order for the SimulationModule to know what happens. After the system has booted, the driver is in the state `Idle`. Is a product arriving, the cell sends a `ReadyToWork` and the driver changes its state to `Requested`. During production the state is `Executing` and afterward it changes back to `Idle`.
 
 ![States of a SimulationDriver](./chapter-2/SimulationStates.png)
 
@@ -173,7 +173,7 @@ public override void Ready(IActivity activity)
 }
 ```
 
-The method `OnOuputSet` gets called when outputs where changed. In this example only the output `ProcessStart` gets set, which would activate the production.
+The method `OnOuputSet` gets called when outputs are changed. In this example only the output `ProcessStart` gets set, which would activate the production.
 
 ```cs
 protected override void OnOutputSet(object sender, string key)
@@ -189,7 +189,7 @@ protected override void OnOutputSet(object sender, string key)
 }
 ```
 
-The method `Result` gets called by the after the (simulated) physical cell has finished its task. It sets the input `ProcessResult` in order to pass on the result to the digital twin.
+The method `Result` gets called after the (simulated) physical cell has finished its task. It sets the input `ProcessResult` in order to pass on the result to the digital twin.
 
 ```cs
 public override void Result(SimulationResult result)
